@@ -125,7 +125,7 @@
                     const answerOrder = randomRange(question.a.length)
                     question.a.forEach(function(answer, aIndex) {
                         answerStr += `
-                        <li style="order:${answerOrder[aIndex]}">
+                        <li style="order: ${answerOrder[aIndex]}">
                             <label>
                                 <input 
                                 type="radio" 
@@ -155,8 +155,15 @@
                 
                 quizEl.addEventListener('submit', function(e) {
                     e.preventDefault()
+                    const alert = e.target.querySelector('div.alert')
                     const selectedInput = e.target.querySelector('input[type=radio]:checked')
-                    console.log(selectedInput)
+                    if (selectedInput === null) {     
+                        alert.innerHTML = "Please select an answer"
+                    } else if (selectedInput.dataset.correct === "true") {
+                        alert.innerHTML = "That's correct!"
+                    } else {
+                        alert.innerHTML = "Oops! try again."
+                    }
                 })
 
             }
