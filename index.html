@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="quiz" class ="container quiz">
+            <!--quiz questions-->
+
+        </div>
+        <!-- Scripts -->
+        <script>
+           const questions = [
+               {
+                   q: "What is the most common element in the Earth's atmosphere?",
+                   a: ["Oxygen",
+                        "Nitrogen",
+                        "Carbon Dioxide",
+                        "Argon"
+                   ],
+                   correct: 1
+               },
+               {
+                   q: "What were the earliest forms of contraceptive made from?",
+                   a: ["Crocodile Dung",
+                        "Goat Bladders",
+                        "Leather"
+                        ],
+                    correct: 0
+               },
+               {
+                   q: "What are people with Alektorophobia afraid of?",
+                   a: ["Pugs",
+                        "Beards",
+                        "Elections",
+                        "Chickens",
+                        "Wizards"
+                    ],
+                    correct: 3
+               },
+               {
+                   q: "What's the correct term for a group of Hippopotamuses?",
+                   a: [
+                       "A convocation of hippos",
+                       "A bloat of hippos",
+                       "A shoal of hippos",
+                       "A flock of hippos"
+                   ],
+                   correct: 1
+               },
+               {
+                   q: "Humans only use 10% of their brains",
+                   a: [
+                       "True",
+                       "False"
+                   ],
+                   correct: 1
+               },
+               {
+                   q: "How has the statue of liberty changed since it was built?",
+                   a: [
+                       "It's changed position",
+                       "It's changed color",
+                       "It's no longer holding a trident"
+                   ],
+                   correct: 1 
+               },
+               {
+                   q: "Why is it hotter in summer than it is in winter?",
+                   a: [
+                       "Because the Earth is closer to the Sun in summer",
+                       "Because of the tilt of the Earth's axis",
+                       "Because the Earth has an elliptical orbit"
+                   ],
+                   correct: 1
+               },
+               {
+                   q: "What does outer space smell like?",
+                   a: [
+                       "Burnt steak",
+                       "Hot Metal",
+                       "Nothing",
+                       "Methane gas (aka Farts)"
+                   ],
+                   correct: 0 || 1
+               },
+               {
+                   q: "Where should you look if you want to see an Opisthenar?",
+                   a: [
+                       "At your hand",
+                       "At a tree",
+                       "In the sky",
+                       "At your foot"
+                   ],
+                   correct: 0
+               },
+               {
+                   q: "What is the driest place on Earth?",
+                   a: [
+                       "Yunguay in the Acatama Desert in Chile",
+                       "Furnace Creek in Death Valley, California",
+                       "The Dry Valleys in Antarctica"
+                   ],
+                   correct: 2
+               },
+               {
+                   q: "Why did Christopher Columbus set sail in 1492?",
+                   a: [
+                       "He wanted to prove the Earth was round",
+                       "He was looking for a westward route to Asia",
+                       "He was looking for America"
+                   ],
+                    correct: 1
+               }
+           ]
+            
+
+            function init() {
+                const quizEl = document.getElementById('quiz')
+                
+                let quizStr = ''
+
+                questions.forEach( function(question, qIndex) {
+                    let answerStr = ''
+                    question.a.forEach(function(answer, aIndex){
+                        answerStr += `
+                        <li style:"order: ">
+                            <label>
+                                <input 
+                                type="radio" 
+                                name="question-${qIndex}"
+                                data-correct="${question.correct === aIndex}"
+                                >
+                                ${answer}
+                            </label>
+                        </li>
+                        `
+                    })
+
+                    quizStr += `
+                    <form>
+                        <h1>${question.q}</h1>
+                        <div class="alert"> - </div>
+                        <ul style="display: flex; flex-direction: column">
+                            ${answerStr}
+                        </ul>
+                        <button type="submit">Submit</button>
+                    </form>
+                    `
+
+                } )
+                
+                quizEl.innerHTML = quizStr
+                
+                quizEl.addEventListener('submit', function(e) {
+                    e.preventDefault()
+                    const selectedInput = e.target.querySelector('input[type=radio]:checked')
+                    console.log(selectedInput)
+                })
+
+            }
+
+            init()
+
+            function random(n) {
+                const r = Math.random() * n 
+                return Math.floor(r) 
+            }
+
+            function randomRange(x) {
+                const arr = []
+                for (let i = 0; i < x; i += 1) {
+                    arr.push(i)
+                }
+
+                const randomArr = []
+                while(arr.length > 0) {
+                    const randomIndex = random(arr.length)
+                    const randomNumber = arr[random(arr.length)]
+                    randomArr.push(randomNumber)
+                    arr.splice(randomIndex, 1)
+                }
+
+                return randomArr
+            }
+
+            console.log(randomRange(8))
+            // for (let i = 0; i < 100; i += 1) {
+            //     random(10)
+            // }
+        </script>
+    </body>
+</html>
